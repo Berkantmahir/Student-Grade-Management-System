@@ -49,8 +49,8 @@ public class Student implements Comparable<Student>{
     }
 
     /**
-     * To {@code String} method
-     * @return  
+     * To String method
+     * @return String version of this object
      */
     @Override
     public String toString() {
