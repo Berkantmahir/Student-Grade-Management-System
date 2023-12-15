@@ -12,16 +12,16 @@ public class Course {
      * @param courseName Name of the course
      */
     public Course(int courseID, String courseName){
-        this.courseID = courseID;
-        this.courseName = courseName;
+        setCourseID(courseID);
+        setCourseName(courseName);
     }
 
     /**
      * Default Constructor
      */
     public Course(){
-        this.courseID = 0;
-        this.courseName = "";
+        setCourseID(0);
+        setCourseName("");
     }
 
     /**
