@@ -42,7 +42,7 @@ public class StudentManagement {
         year = in.nextInt();
         nextLine = in.nextLine();
         
-        studentsList.add(new Student(studentID, name, age, year));
+        StudentManagement.getStudentsList().add(new Student(studentID, name, age, year));
 
         return true;
     }
