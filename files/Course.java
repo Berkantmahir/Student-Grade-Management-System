@@ -1,10 +1,19 @@
 package files;
 
-public class Course {
+import java.util.ArrayList;
+
+/**
+ * Course Class
+ * @see Comparable
+ * @author Rıfat Arifoğlu
+ */
+
+public class Course implements Comparable<Course>{
     
     //Variables
     private int courseID;
     private String courseName;
+    private ArrayList<Student> enrolledStudents;
 
     /**
      * Constructor
@@ -14,6 +23,37 @@ public class Course {
     public Course(int courseID, String courseName){
         setCourseID(courseID);
         setCourseName(courseName);
+        enrolledStudents = new ArrayList<>();
+    }
+
+    /**
+     * Compare to interface
+     * @param o Course who is going compared
+     * @return  Difference of two courses' IDs
+     */
+    @Override
+    public int compareTo(Course o) {
+        return this.getCourseID() - o.getCourseID();
+    }
+
+    /**
+     * To String method
+     * @return String version of this object
+     */
+    @Override
+    public String toString() {
+        String output = "";
+        output += "ID: " + this.getCourseID() + "\n";
+        output += "Name: " + this.getCourseName();
+
+        if(!this.getEnrolledStudents().isEmpty()){
+            output += "\nStudents:";
+            for (Student student : this.getEnrolledStudents()) {
+                output += "\n" + student;
+            }
+        }
+
+        return output;
     }
 
     /**
@@ -36,6 +76,13 @@ public class Course {
      */
     public String getCourseName() {
         return courseName;
+    }
+
+    /**
+     * @return {@code ArrayList} of the enrolled students
+     */
+    public ArrayList<Student> getEnrolledStudents() {
+        return enrolledStudents;
     }
 
     /**
