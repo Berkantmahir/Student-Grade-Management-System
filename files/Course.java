@@ -28,6 +28,21 @@ public class Course implements Comparable<Course>{
     }
 
     /**
+     * Add student to the course
+     * @param student Student that going to add to the course
+     * @return        If student has been enrolled
+     */
+    public boolean addStudent(Student student){
+        if(quota > this.getEnrolledStudents().size()){
+            this.getEnrolledStudents().add(student);
+            return true;
+        }else{
+            System.out.println("Quota has reached.");
+            return false;
+        }
+    }
+
+    /**
      * Compare to interface
      * @param o Course who is going compared
      * @return  Difference of two courses' IDs
