@@ -2,10 +2,11 @@ package files;
 
 /**
  * Student Class
+ * @see Comparable
  * @author Rıfat Arifoğlu
  */
 
-public class Student {
+public class Student implements Comparable<Student>{
     
     //Variables
     private int studentID;
@@ -14,7 +15,7 @@ public class Student {
     private int year;
 
     /**
-     * Consturtor
+     * Constructor
      * @param studentID ID of the student
      * @param name      Name of the student
      * @param age       Age of the student
@@ -35,6 +36,30 @@ public class Student {
         this.setName("");
         this.setAge(0);
         this.setYear(0);
+    }
+
+    /**
+     * Compare to interface
+     * @param o Student who is going compared
+     * @return  Difference of two students' IDs
+     */
+    @Override
+    public int compareTo(Student o) {
+        return this.getStudentID() - o.getStudentID();
+    }
+
+    /**
+     * To {@code String} method
+     * @return  
+     */
+    @Override
+    public String toString() {
+        String output = "";
+        output += "ID: " + this.getStudentID() + "\n";
+        output += "Name: " + this.getName() + "\n";
+        output += "Age: " + this.getAge() + "\n";
+        output += "Year: " + this.getYear();
+        return output;
     }
 
     //Getters-Setters
