@@ -13,6 +13,7 @@ public class Course implements Comparable<Course>{
     //Variables
     private int courseID;
     private String courseName;
+    private int quota;
     private ArrayList<Student> enrolledStudents;
 
     /**
@@ -20,7 +21,7 @@ public class Course implements Comparable<Course>{
      * @param courseID   ID of the course
      * @param courseName Name of the course
      */
-    public Course(int courseID, String courseName){
+    public Course(int courseID, String courseName, int quota){
         setCourseID(courseID);
         setCourseName(courseName);
         enrolledStudents = new ArrayList<>();
@@ -79,6 +80,13 @@ public class Course implements Comparable<Course>{
     }
 
     /**
+     * @return Quota of the course
+     */
+    public int getQuota() {
+        return quota;
+    }
+
+    /**
      * @return {@code ArrayList} of the enrolled students
      */
     public ArrayList<Student> getEnrolledStudents() {
@@ -97,5 +105,12 @@ public class Course implements Comparable<Course>{
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    /**
+     * @param quota Quota of the course
+     */
+    public void setQuota(int quota) {
+        this.quota = quota;
     }
 }
