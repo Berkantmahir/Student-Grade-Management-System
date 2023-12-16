@@ -46,9 +46,46 @@ public class CourseManager {
         return true;
     }
 
+    /**
+     * Removes {@code Course} with given ID
+     * @return Is course is removed
+     */
     public boolean removeCourse(){
-        //TO-DO
+        int courseID = 0;
+
+        System.out.println("ID of the course going to remove: ");
+        
+        if(!CourseManager.isCourseExist(courseID)){
+            System.out.println("There isn't any course that have " + courseID + " ID.");
+            return false;
+        }
+
+        for(Course course : CourseManager.getCourseList()){
+            if(course.getCourseID() == courseID){
+               CourseManager.getCourseList().remove(course); 
+            }
+        }
+
         return true;
+    }
+
+    /**
+     * Prints out {@code Course} details with given ID
+     */
+    public static void viewCourseDetails(){
+        int courseID = 0;
+
+        System.out.println("ID of the course going to view: ");
+        
+        if(!CourseManager.isCourseExist(courseID)){
+            System.out.println("There isn't any course that have " + courseID + " ID.");
+        }else{
+            for(Course course : CourseManager.getCourseList()){
+                if(course.getCourseID() == courseID){
+                System.out.println(course);
+                }
+            }
+        }
     }
 
     /**
