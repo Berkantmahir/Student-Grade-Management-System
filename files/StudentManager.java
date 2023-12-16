@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * StudentManagement Class
+ * StudentManager Class
  * @author Rıfat Arifoğlu
  */
-public class StudentManagement {
+public class StudentManager {
 
     //Variables
     private static ArrayList<Student> studentsList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class StudentManagement {
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(StudentManagement.isStudentExist(studentID)){
+        if(StudentManager.isStudentExist(studentID)){
             System.out.println("This ID already exists!");
             return false;
         }
@@ -46,7 +46,7 @@ public class StudentManagement {
         year = in.nextInt();
         nextLine = in.nextLine();
         
-        StudentManagement.getStudentsList().add(new Student(studentID, name, age, year));
+        StudentManager.getStudentsList().add(new Student(studentID, name, age, year));
 
         return true;
     }
@@ -60,14 +60,14 @@ public class StudentManagement {
 
         System.out.println("ID of the student going to remove: ");
         
-        if(!StudentManagement.isStudentExist(studentID)){
+        if(!StudentManager.isStudentExist(studentID)){
             System.out.println("There isn't any student that have " + studentID + " ID.");
             return false;
         }
 
-        for(Student student : StudentManagement.getStudentsList()){
+        for(Student student : StudentManager.getStudentsList()){
             if(student.getStudentID() == studentID){
-                StudentManagement.studentsList.remove(student);
+                StudentManager.studentsList.remove(student);
             }
         }
 
@@ -105,12 +105,12 @@ public class StudentManagement {
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!StudentManagement.isStudentExist(studentID)){
+        if(!StudentManager.isStudentExist(studentID)){
             System.out.println("There isn't any student that have " + studentID + " ID.");
             return false;
         }
 
-        for(Student student : StudentManagement.getStudentsList()){
+        for(Student student : StudentManager.getStudentsList()){
             if(student.getStudentID() == studentID){
                 currentStudent = student;
             }
@@ -125,7 +125,7 @@ public class StudentManagement {
      * @return  Is this student exists
      */
     public static boolean isStudentExist(int ID){
-        for (Student student : StudentManagement.getStudentsList()) {
+        for (Student student : StudentManager.getStudentsList()) {
             if(student.getStudentID() == ID){
                 return true;
             }
@@ -137,15 +137,15 @@ public class StudentManagement {
      * @return {@code ArrayList<Student>} of the students
      */
     public static ArrayList<Student> getStudentsList() {
-        return StudentManagement.studentsList;
+        return StudentManager.studentsList;
     }
 
     /**
-     * Closes the {@code Scanner} object of the {@link files.StudentManagement} class
+     * Closes the {@code Scanner} object of the {@link files.StudentManager} class
      */
     public static void closeScanner(){
         try {
-            StudentManagement.in.close();
+            StudentManager.in.close();
         } catch (Exception e) {
             System.out.println("Scanner already closed!");
         }

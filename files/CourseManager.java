@@ -29,7 +29,7 @@ public class CourseManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(StudentManagement.isStudentExist(courseID)){
+        if(StudentManager.isStudentExist(courseID)){
             System.out.println("This ID already exists!");
             return false;
         }
