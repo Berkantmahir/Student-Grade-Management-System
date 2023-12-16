@@ -78,8 +78,7 @@ public class Course implements Comparable<Course>{
      * Default Constructor
      */
     public Course(){
-        setCourseID(0);
-        setCourseName("");
+        this(0, "", 0);
     }
 
     /**

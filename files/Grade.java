@@ -17,8 +17,8 @@ public class Grade implements Comparable<Grade>{
      * @param student Student
      * @param course  Course
      */
-    public Grade(Student student, Course course){
-        this.gradeValue = 0;
+    public Grade(Student student, Course course, int gradeValue){
+        this.gradeValue = gradeValue;
         this.student = student;
         this.course = course;
     }
@@ -27,7 +27,7 @@ public class Grade implements Comparable<Grade>{
      * Default Constructor
      */
     public Grade(){
-        this(null, null);
+        this(null, null, 0);
     }
 
     /**

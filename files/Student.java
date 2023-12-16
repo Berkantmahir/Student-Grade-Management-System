@@ -32,10 +32,7 @@ public class Student implements Comparable<Student>{
      * Default Consturctor
      */
     public Student(){
-        this.setStudentID(0);
-        this.setName("");
-        this.setAge(0);
-        this.setYear(0);
+        this(0, "", 0, 0);
     }
 
     /**
