@@ -19,7 +19,7 @@ public class GradeManager {
     public static boolean recordNewGrade(){
         int courseID = 0;
         int studentID = 0;
-        int gradeValue = 0;
+        double gradeValue = 0;
         Course currentCourse = null;
         Student currentStudent = null;
 
@@ -56,7 +56,7 @@ public class GradeManager {
         }
 
         System.out.print("Value of the grade: ");
-        gradeValue = in.nextInt();
+        gradeValue = in.nextDouble();
         nextLine = in.nextLine();
         
         GradeManager.getGradesList().add(new Grade(currentStudent, currentCourse, gradeValue));
@@ -71,7 +71,7 @@ public class GradeManager {
     public static boolean updateGrade(){
         int courseID = 0;
         int studentID = 0;
-        int gradeValue = 0;
+        double gradeValue = 0;
         Course currentCourse = null;
         Student currentStudent = null;
 
@@ -113,7 +113,7 @@ public class GradeManager {
         }
 
         System.out.print("Value of the new grade: ");
-        gradeValue = in.nextInt();
+        gradeValue = in.nextDouble();
         nextLine = in.nextLine();
         
         for (Grade grade : GradeManager.getGradesList()) {
@@ -213,6 +213,79 @@ public class GradeManager {
                 System.out.println(output + "\n");
             }
         }
+    }
+
+    public static void viewAvarageGrade(){
+        int choice = 0;
+        String nextLine = "";
+
+        System.out.print("Choose Student(1) or Course(2): ");
+        choice = in.nextInt();
+        nextLine = in.nextLine();
+
+        if(choice == 1){
+            int studentID = 0;
+            Student currentStudent = null;
+                
+            System.out.print("ID of the student: ");
+            studentID = in.nextInt();
+            nextLine = in.nextLine();
+
+            if(isGradeExists(studentID, 2)){
+                for (Grade grade : GradeManager.getGradesList()) {
+                    if(grade.getStudent().getStudentID() == studentID){
+                        currentStudent = grade.getStudent();
+                    }
+                }
+                System.out.println("Avarage: " + calculateAverageGrade(currentStudent));
+            }else{
+                System.out.println("There isn't any student that have " + studentID + " ID graded.");
+            }
+        }else if(choice == 2){
+            int courceID = 0;
+            Course currentCourse = null;
+                
+            System.out.print("ID of the student: ");
+            courceID = in.nextInt();
+            nextLine = in.nextLine();
+
+            if(isGradeExists(courceID, 2)){
+                for (Grade grade : GradeManager.getGradesList()) {
+                    if(grade.getCourse().getCourseID() == courceID){
+                        currentCourse = grade.getCourse();
+                    }
+                }
+                System.out.println("Avarage: " + calculateAverageGrade(currentCourse));
+            }else{
+                System.out.println("There isn't any student that have " + courceID + " ID graded.");
+            }
+        }else{
+            System.out.println("Please choose 1 or 2!");
+        }
+    }
+
+    public static double calculateAverageGrade(Student student){
+        double sumOfGrades = 0.0;
+        int count = 0;
+        for(Grade grade : GradeManager.getGradesList()){
+            if(grade.getStudent() == student){
+                sumOfGrades += grade.getGradeValue();
+                count++;
+            }
+        }
+        return sumOfGrades / count;
+    }
+
+    public static double calculateAverageGrade(Course course){
+        double sumOfGrades = 0.0;
+        int count = 0;
+        for(Grade grade : GradeManager.getGradesList()){
+            if(grade.getCourse() == course){
+                sumOfGrades += grade.getGradeValue();
+                count++;
+            }
+        }
+        return sumOfGrades / count;
     }
 
     /**
