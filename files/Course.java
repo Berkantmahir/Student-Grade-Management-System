@@ -67,6 +67,8 @@ public class Course implements Comparable<Course>{
             for (Student student : this.getEnrolledStudents()) {
                 output += "\n" + student;
             }
+        }else{
+            output += "\nThere isn't student currently enrolled to this course";
         }
 
         return output;
