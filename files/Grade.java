@@ -14,8 +14,8 @@ public class Grade implements Comparable<Grade>{
 
     /**
      * Constructor
-     * @param student Student
-     * @param course  Course
+     * @param student {@code Student}
+     * @param course  {@code Course}
      */
     public Grade(Student student, Course course, int gradeValue){
         this.gradeValue = gradeValue;
@@ -32,8 +32,8 @@ public class Grade implements Comparable<Grade>{
 
     /**
      * Compare to interface
-     * @param o Grade who is going compared
-     * @return  Difference of two grades' values
+     * @param o {@code Grade} who is going compared
+     * @return  Difference of two {@code Grade}s' values
      */
     @Override
     public int compareTo(Grade o) {
@@ -41,14 +41,27 @@ public class Grade implements Comparable<Grade>{
     }
 
     /**
-     * @return Course
+     * To String method
+     * @return {@code String} version of this object
+     */
+    @Override
+    public String toString() {
+        String output = "";
+        output += "ID of Student: " + this.getStudent().getStudentID();
+        output += "ID of Course: " + this.getCourse().getCourseID();
+        output += "Grade: " + this.getGradeValue();
+        return output;
+    }
+
+    /**
+     * @return {@code Course}
      */
     public Course getCourse() {
         return course;
     }
 
     /**
-     * @return Student
+     * @return {@code Student}
      */
     public Student getStudent() {
         return student;

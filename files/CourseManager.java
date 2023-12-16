@@ -15,7 +15,7 @@ public class CourseManager {
 
     /**
      * Create a {@code Course}
-     * @return Is the course created
+     * @return Is the {@code Course} created
      */
     public static boolean addCourse(){
         int courseID = 0;
@@ -48,7 +48,7 @@ public class CourseManager {
 
     /**
      * Removes {@code Course} with given ID
-     * @return Is course is removed
+     * @return Is {@code Course} is removed
      */
     public boolean removeCourse(){
         int courseID = 0;
@@ -95,9 +95,9 @@ public class CourseManager {
     }
 
     /**
-     * Checks if this course is already created.
-     * @param s Course that going to get checked
-     * @return  Is this course exists
+     * Checks if this {@code Course} is already created.
+     * @param ID ID of the {@code Course} that going to get checked
+     * @return  Is this {@code Course} exists
      */
     public static boolean isCourseExist(int ID){
         for (Course course : CourseManager.getCourseList()) {

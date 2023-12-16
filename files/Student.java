@@ -16,9 +16,9 @@ public class Student implements Comparable<Student>{
 
     /**
      * Constructor
-     * @param studentID ID of the student
-     * @param name      Name of the student
-     * @param age       Age of the student
+     * @param studentID ID of the {@code Student}
+     * @param name      Name of the {@code Student}
+     * @param age       Age of the {@code Student}
      * @param year      Which year of the school 
      */
     public Student(int studentID, String name, int age, int year){
@@ -37,8 +37,8 @@ public class Student implements Comparable<Student>{
 
     /**
      * Compare to interface
-     * @param o Student who is going compared
-     * @return  Difference of two students' IDs
+     * @param o {@code Student} who is going compared
+     * @return  Difference of two {@code Student}s' IDs
      */
     @Override
     public int compareTo(Student o) {
@@ -47,7 +47,7 @@ public class Student implements Comparable<Student>{
 
     /**
      * To String method
-     * @return String version of this object
+     * @return {@code String} version of this object
      */
     @Override
     public String toString() {
@@ -62,56 +62,56 @@ public class Student implements Comparable<Student>{
     //Getters-Setters
 
     /**
-     * @return Age of the student
+     * @return Age of the {@code Student}
      */
     public int getAge() {
         return age;
     }
 
     /**
-     * @return Name of the student
+     * @return Name of the {@code Student}
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return ID of the student
+     * @return ID of the {@code Student}
      */
     public int getStudentID() {
         return studentID;
     }
 
     /**
-     * @return The school year of the student
+     * @return The school year of the {@code Student}
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * @param age Age of the student
+     * @param age Age of the {@code Student}
      */
     public void setAge(int age) {
         this.age = age;
     }
 
     /**
-     * @param name Name of the student
+     * @param name Name of the {@code Student}
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @param studentID ID of the student
+     * @param studentID ID of the {@code Student}
      */
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
 
     /**
-     * @param year The school year of the student
+     * @param year The school year of the {@code Student}
      */
     public void setYear(int year) {
         this.year = year;

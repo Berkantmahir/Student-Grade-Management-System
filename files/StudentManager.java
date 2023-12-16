@@ -15,7 +15,7 @@ public class StudentManager {
     
     /**
      * Create a {@code Student}
-     * @return Is the student created
+     * @return Is the {@code Student} created
      */
     public static boolean addStudent(){
         int studentID = 0;
@@ -53,7 +53,7 @@ public class StudentManager {
 
     /**
      * Removes {@code Student} with given ID
-     * @return Is student is removed
+     * @return Is {@code Student} is removed
      */
     public static boolean removeStudent(){
         int studentID = 0;
@@ -76,7 +76,7 @@ public class StudentManager {
 
     /**
      * Enroll {@code Student} to a {@code Course}
-     * @return Is student has enrolled
+     * @return Is {@code Student} has enrolled
      */
     public static boolean enrollStudent(){
         int courseID = 0;
@@ -120,9 +120,9 @@ public class StudentManager {
     }
 
     /**
-     * Checks if this student is already created.
-     * @param s Student that going to get checked
-     * @return  Is this student exists
+     * Checks if this {@code Student} is already created.
+     * @param ID ID of the {@code Student} that going to get checked
+     * @return   Is this {@code Student} exists
      */
     public static boolean isStudentExist(int ID){
         for (Student student : StudentManager.getStudentsList()) {

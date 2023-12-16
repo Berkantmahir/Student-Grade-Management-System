@@ -18,8 +18,8 @@ public class Course implements Comparable<Course>{
 
     /**
      * Constructor
-     * @param courseID   ID of the course
-     * @param courseName Name of the course
+     * @param courseID   ID of the {@code Course}
+     * @param courseName Name of the {@code Course}
      */
     public Course(int courseID, String courseName, int quota){
         setCourseID(courseID);
@@ -28,8 +28,15 @@ public class Course implements Comparable<Course>{
     }
 
     /**
-     * Add student to the course
-     * @param student Student that going to add to the course
+     * Default Constructor
+     */
+    public Course(){
+        this(0, "", 0);
+    }
+
+    /**
+     * Add student to the {@code Course}
+     * @param student Student that going to add to the {@code Course}
      * @return        If student has been enrolled
      */
     public boolean addStudent(Student student){
@@ -44,8 +51,8 @@ public class Course implements Comparable<Course>{
 
     /**
      * Compare to interface
-     * @param o Course who is going compared
-     * @return  Difference of two courses' IDs
+     * @param o {@code Course} who is going compared
+     * @return  Difference of two {@code Course}s' IDs
      */
     @Override
     public int compareTo(Course o) {
@@ -54,7 +61,7 @@ public class Course implements Comparable<Course>{
 
     /**
      * To String method
-     * @return String version of this object
+     * @return {@code String} version of this object
      */
     @Override
     public String toString() {
@@ -75,28 +82,21 @@ public class Course implements Comparable<Course>{
     }
 
     /**
-     * Default Constructor
-     */
-    public Course(){
-        this(0, "", 0);
-    }
-
-    /**
-     * @return ID of the course
+     * @return ID of the {@code Course}
      */
     public int getCourseID() {
         return courseID;
     }
 
     /**
-     * @return Name of the course
+     * @return Name of the {@code Course}
      */
     public String getCourseName() {
         return courseName;
     }
 
     /**
-     * @return Quota of the course
+     * @return Quota of the {@code Course}
      */
     public int getQuota() {
         return quota;
@@ -110,21 +110,21 @@ public class Course implements Comparable<Course>{
     }
 
     /**
-     * @param courseID ID of the course
+     * @param courseID ID of the {@code Course}
      */
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
 
     /**
-     * @param courseName Name of the course
+     * @param courseName Name of the {@code Course}
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
     /**
-     * @param quota Quota of the course
+     * @param quota Quota of the {@code Course}
      */
     public void setQuota(int quota) {
         this.quota = quota;
