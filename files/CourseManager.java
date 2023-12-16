@@ -50,8 +50,9 @@ public class CourseManager {
      * Removes {@code Course} with given ID
      * @return Is {@code Course} is removed
      */
-    public boolean removeCourse(){
+    public static boolean removeCourse(){
         int courseID = 0;
+        Course courseRemoved = null;
         String nextLine = "";
 
         System.out.print("ID of the course going to remove: ");
@@ -65,9 +66,11 @@ public class CourseManager {
 
         for(Course course : CourseManager.getCourseList()){
             if(course.getCourseID() == courseID){
-               CourseManager.getCourseList().remove(course); 
+               courseRemoved = course;
             }
         }
+
+        CourseManager.getCourseList().remove(courseRemoved);
 
         return true;
     }
@@ -82,13 +85,15 @@ public class CourseManager {
         System.out.print("ID of the course going to view: ");
         courseID = in.nextInt();
         nextLine = in.nextLine();
+
+        System.out.println();
         
         if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");
         }else{
             for(Course course : CourseManager.getCourseList()){
                 if(course.getCourseID() == courseID){
-                System.out.println(course);
+                    System.out.println(course);
                 }
             }
         }

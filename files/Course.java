@@ -24,6 +24,7 @@ public class Course implements Comparable<Course>{
     public Course(int courseID, String courseName, int quota){
         setCourseID(courseID);
         setCourseName(courseName);
+        setQuota(quota);
         enrolledStudents = new ArrayList<>();
     }
 
@@ -70,7 +71,7 @@ public class Course implements Comparable<Course>{
         output += "Name: " + this.getCourseName();
 
         if(!this.getEnrolledStudents().isEmpty()){
-            output += "\nStudents:";
+            output += "\nStudents:\n";
             for (Student student : this.getEnrolledStudents()) {
                 output += "\n" + student;
             }

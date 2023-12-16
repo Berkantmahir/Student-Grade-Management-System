@@ -47,8 +47,8 @@ public class Grade implements Comparable<Grade>{
     @Override
     public String toString() {
         String output = "";
-        output += "ID of Student: " + this.getStudent().getStudentID();
-        output += "ID of Course: " + this.getCourse().getCourseID();
+        output += "ID of Student: " + this.getStudent().getStudentID() + "\n";
+        output += "ID of Course: " + this.getCourse().getCourseID() + "\n";
         output += "Grade: " + this.getGradeValue();
         return output;
     }

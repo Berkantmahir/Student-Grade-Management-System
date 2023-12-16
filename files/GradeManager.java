@@ -29,7 +29,7 @@ public class GradeManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(0)){
+        if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");
             return false;
         }
@@ -81,7 +81,7 @@ public class GradeManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(0)){
+        if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");
             return false;
         }
@@ -107,7 +107,7 @@ public class GradeManager {
             }
         }
 
-        if(isGradeExists(currentStudent, currentCourse)){
+        if(!isGradeExists(currentStudent, currentCourse)){
             System.out.println("There isn't any grade of student with " + studentID + " ID of course with " + courseID + " ID.");
             return false;
         }
@@ -135,6 +135,8 @@ public class GradeManager {
         System.out.print("1-Full grades\n2-Grades of certain course\n3-Grades of certain student\nChoice: ");
         choice = in.nextInt();
         nextLine = in.nextLine();
+
+        System.out.println();
 
         switch (choice) {
             case 1:
@@ -193,8 +195,8 @@ public class GradeManager {
         for(Grade grade : GradeManager.getGradesList()){
             if(grade.getStudent() == student){
                 String output = "";
-                output += "ID of Course: " + grade.getCourse().getCourseID();
-                output += "Grade: " + grade.getGradeValue();
+                output += "ID of Course: " + grade.getCourse().getCourseID() + "\n";
+                output += "Grade: " + grade.getGradeValue() + "\n";
                 System.out.println(output + "\n");
             }
         }
@@ -208,13 +210,16 @@ public class GradeManager {
         for(Grade grade : GradeManager.getGradesList()){
             if(grade.getCourse() == course){
                 String output = "";
-                output += "ID of Student: " + grade.getStudent().getStudentID();
-                output += "Grade: " + grade.getGradeValue();
+                output += "ID of Student: " + grade.getStudent().getStudentID() + "\n";
+                output += "Grade: " + grade.getGradeValue() + "\n";
                 System.out.println(output + "\n");
             }
         }
     }
 
+    /**
+     * Shows the avarage of grades
+     */
     public static void viewAvarageGrade(){
         int choice = 0;
         String nextLine = "";
@@ -222,6 +227,8 @@ public class GradeManager {
         System.out.print("Choose Student(1) or Course(2): ");
         choice = in.nextInt();
         nextLine = in.nextLine();
+
+        System.out.println();
 
         if(choice == 1){
             int studentID = 0;
@@ -231,7 +238,7 @@ public class GradeManager {
             studentID = in.nextInt();
             nextLine = in.nextLine();
 
-            if(isGradeExists(studentID, 2)){
+            if(isGradeExists(studentID, 1)){
                 for (Grade grade : GradeManager.getGradesList()) {
                     if(grade.getStudent().getStudentID() == studentID){
                         currentStudent = grade.getStudent();
@@ -245,7 +252,7 @@ public class GradeManager {
             int courceID = 0;
             Course currentCourse = null;
                 
-            System.out.print("ID of the student: ");
+            System.out.print("ID of the course: ");
             courceID = in.nextInt();
             nextLine = in.nextLine();
 
@@ -257,13 +264,18 @@ public class GradeManager {
                 }
                 System.out.println("Avarage: " + calculateAverageGrade(currentCourse));
             }else{
-                System.out.println("There isn't any student that have " + courceID + " ID graded.");
+                System.out.println("There isn't any course that have " + courceID + " ID graded.");
             }
         }else{
             System.out.println("Please choose 1 or 2!");
         }
     }
 
+    /**
+     * Avarage calculator
+     * @param student {@code Student} going to take {@code Grades}
+     * @return        Avarage of grade values
+     */
     public static double calculateAverageGrade(Student student){
         double sumOfGrades = 0.0;
         int count = 0;
@@ -276,6 +288,11 @@ public class GradeManager {
         return sumOfGrades / count;
     }
 
+    /**
+     * Avarage calculator
+     * @param course {@code Course} going to take {@code Grades}
+     * @return        Avarage of grade values
+     */
     public static double calculateAverageGrade(Course course){
         double sumOfGrades = 0.0;
         int count = 0;
@@ -304,6 +321,12 @@ public class GradeManager {
         return isExist;
     }
 
+    /**
+     * Checks the grades existence according to ID
+     * @param ID     ID of {@code Student} or {@code Course}
+     * @param choice Determine {@code Student}(1) or {@code Course}(2)
+     * @return       Is grade exists
+     */
     public static boolean isGradeExists(int ID, int choice){
         boolean isExist = false;
         switch (choice) {

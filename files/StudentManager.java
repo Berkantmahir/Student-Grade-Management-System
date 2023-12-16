@@ -57,8 +57,12 @@ public class StudentManager {
      */
     public static boolean removeStudent(){
         int studentID = 0;
+        Student studentRemoved = null;
+        String nextLine = "";
 
-        System.out.println("ID of the student going to remove: ");
+        System.out.print("ID of the student going to remove: ");
+        studentID = in.nextInt();
+        nextLine = in.nextLine();
         
         if(!StudentManager.isStudentExist(studentID)){
             System.out.println("There isn't any student that have " + studentID + " ID.");
@@ -67,9 +71,11 @@ public class StudentManager {
 
         for(Student student : StudentManager.getStudentsList()){
             if(student.getStudentID() == studentID){
-                StudentManager.studentsList.remove(student);
+                studentRemoved = student;
             }
         }
+
+        StudentManager.studentsList.remove(studentRemoved);
 
         return true;
     }
@@ -90,7 +96,7 @@ public class StudentManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(0)){
+        if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");
             return false;
         }
