@@ -52,8 +52,11 @@ public class CourseManager {
      */
     public boolean removeCourse(){
         int courseID = 0;
+        String nextLine = "";
 
-        System.out.println("ID of the course going to remove: ");
+        System.out.print("ID of the course going to remove: ");
+        courseID = in.nextInt();
+        nextLine = in.nextLine();
         
         if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");
@@ -74,8 +77,11 @@ public class CourseManager {
      */
     public static void viewCourseDetails(){
         int courseID = 0;
+        String nextLine = "";
 
-        System.out.println("ID of the course going to view: ");
+        System.out.print("ID of the course going to view: ");
+        courseID = in.nextInt();
+        nextLine = in.nextLine();
         
         if(!CourseManager.isCourseExist(courseID)){
             System.out.println("There isn't any course that have " + courseID + " ID.");

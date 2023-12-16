@@ -101,7 +101,7 @@ public class StudentManager {
             }
         }
 
-        System.out.println("ID of the student going to enrolled: ");
+        System.out.print("ID of the student going to enrolled: ");
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
