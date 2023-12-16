@@ -3,6 +3,10 @@ package files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * StudentManagement Class
+ * @author Rıfat Arifoğlu
+ */
 public class StudentManagement {
 
     //Variables

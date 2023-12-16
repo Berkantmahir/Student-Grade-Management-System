@@ -1,6 +1,11 @@
 package files;
 
-public class Grade {
+/**
+ * Grade Class
+ * @see Comparable
+ * @author Rıfat Arifoğlu
+ */
+public class Grade implements Comparable<Grade>{
     
     //Variables
     private int gradeValue;
@@ -23,6 +28,16 @@ public class Grade {
      */
     public Grade(){
         this(null, null);
+    }
+
+    /**
+     * Compare to interface
+     * @param o Grade who is going compared
+     * @return  Difference of two grades' values
+     */
+    @Override
+    public int compareTo(Grade o) {
+        return this.getGradeValue() - o.getGradeValue();
     }
 
     /**
