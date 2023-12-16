@@ -53,7 +53,7 @@ public class StudentManager {
 
     /**
      * Removes {@code Student} with given ID
-     * @return If student is removed
+     * @return Is student is removed
      */
     public static boolean removeStudent(){
         int studentID = 0;
