@@ -41,6 +41,12 @@ public class Course implements Comparable<Course>{
      * @return        If student has been enrolled
      */
     public boolean addStudent(Student student){
+        for (Student enrolled : this.getEnrolledStudents()) {
+            if(student == enrolled){
+                System.out.println("This student already enrolled.");
+                return false;
+            }
+        }
         if(quota > this.getEnrolledStudents().size()){
             this.getEnrolledStudents().add(student);
             return true;
@@ -73,10 +79,10 @@ public class Course implements Comparable<Course>{
         if(!this.getEnrolledStudents().isEmpty()){
             output += "\nStudents:\n";
             for (Student student : this.getEnrolledStudents()) {
-                output += "\n" + student;
+                output += "\n" + student + "\n";
             }
         }else{
-            output += "\nThere isn't student currently enrolled to this course";
+            output += "\nThere isn't any student currently enrolled to this course";
         }
 
         return output;

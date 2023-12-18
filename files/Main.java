@@ -25,7 +25,7 @@ public class Main{
                 case 1:
                     int choiceA = 0;
 
-                    System.out.print("1-Add Student\n2-Remove Student\n3-Enroll Student\nChoice: ");
+                    System.out.print("1-Add Student\n2-Remove Student\n3-Enroll Student\n4-Return\nChoice: ");
                     choiceA = in.nextInt();
                     nextLine = in.nextLine();
 
@@ -37,6 +37,8 @@ public class Main{
                         StudentManager.removeStudent();
                     }else if(choiceA == 3){
                         StudentManager.enrollStudent();
+                    }else if(choiceA == 4){
+                        System.out.println("Returning...");
                     }else{
                         System.out.println("Please enter a valid choice");
                     }
@@ -45,7 +47,7 @@ public class Main{
                 case 2:
                     int choiceB = 0;
 
-                    System.out.print("1-Add Course\n2-Remove Course\n3-View Course Details\nChoice: ");
+                    System.out.print("1-Add Course\n2-Remove Course\n3-View Course Details\n4-Return\nChoice: ");
                     choiceB = in.nextInt();
                     nextLine = in.nextLine();
 
@@ -57,6 +59,8 @@ public class Main{
                         CourseManager.removeCourse();
                     }else if(choiceB == 3){
                         CourseManager.viewCourseDetails();
+                    }else if(choiceB == 4){
+                        System.out.println("Returning...");
                     }else{
                         System.out.println("Please enter a valid choice");
                     }
@@ -65,7 +69,7 @@ public class Main{
                 case 3:
                     int choiceC = 0;
 
-                    System.out.print("1-Record New Grade\n2-Update Grade\n3-View Grades\n4-View Avarage Grades\nChoice: ");
+                    System.out.print("1-Record New Grade\n2-Update Grade\n3-View Grades\n4-View Avarage Grades\n5-Return\nChoice: ");
                     choiceC = in.nextInt();
                     nextLine = in.nextLine();
 
@@ -79,13 +83,15 @@ public class Main{
                         GradeManager.viewGrades();
                     }else if(choiceC == 4){
                         GradeManager.viewAvarageGrade();
+                    }else if(choiceC == 5){
+                        System.out.println("Returning...");
                     }else{
                         System.out.println("Please enter a valid choice");
                     }
 
                     break;
                 case 4:
-                    System.out.println("Exitting.");
+                    System.out.println("Exitting...");
                     break;
                 default:
                     System.out.println("Please enter a valid choice");

@@ -29,30 +29,25 @@ public class GradeManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(courseID)){
-            System.out.println("There isn't any course that have " + courseID + " ID.");
-            return false;
-        }
+        currentCourse = CourseManager.findCourse(courseID, true);
 
-        for(Course course : CourseManager.getCourseList()){
-            if(course.getCourseID() == courseID){
-                currentCourse = course;
-            }
+        if(currentCourse == null){
+            return false;
         }
 
         System.out.print("ID of the student going to graded: ");
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!StudentManager.isStudentExist(studentID)){
-            System.out.println("There isn't any student that have " + studentID + " ID.");
+        currentStudent = StudentManager.findStudent(studentID, true);
+
+        if(currentStudent == null){
             return false;
         }
 
-        for(Student student : StudentManager.getStudentsList()){
-            if(student.getStudentID() == studentID){
-                currentStudent = student;
-            }
+        if(GradeManager.findGrade(currentStudent, currentCourse, false) != null){
+            System.out.println("This grade already exists!");
+            return false;
         }
 
         System.out.print("Value of the grade: ");
@@ -74,6 +69,7 @@ public class GradeManager {
         double gradeValue = 0;
         Course currentCourse = null;
         Student currentStudent = null;
+        Grade currentGrade = null;
 
         String nextLine = "";
 
@@ -81,34 +77,25 @@ public class GradeManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(courseID)){
-            System.out.println("There isn't any course that have " + courseID + " ID.");
-            return false;
-        }
+        currentCourse = CourseManager.findCourse(courseID, true);
 
-        for(Course course : CourseManager.getCourseList()){
-            if(course.getCourseID() == courseID){
-                currentCourse = course;
-            }
+        if(currentCourse == null){
+            return false;
         }
 
         System.out.print("ID of the student going to graded: ");
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!StudentManager.isStudentExist(studentID)){
-            System.out.println("There isn't any student that have " + studentID + " ID.");
+        currentStudent = StudentManager.findStudent(studentID, true);
+
+        if(currentStudent == null){
             return false;
         }
 
-        for(Student student : StudentManager.getStudentsList()){
-            if(student.getStudentID() == studentID){
-                currentStudent = student;
-            }
-        }
+        currentGrade = GradeManager.findGrade(currentStudent, currentCourse, true);
 
-        if(!isGradeExists(currentStudent, currentCourse)){
-            System.out.println("There isn't any grade of student with " + studentID + " ID of course with " + courseID + " ID.");
+        if(currentGrade == null){
             return false;
         }
 
@@ -116,17 +103,13 @@ public class GradeManager {
         gradeValue = in.nextDouble();
         nextLine = in.nextLine();
         
-        for (Grade grade : GradeManager.getGradesList()) {
-            if(grade.getCourse() == currentCourse && grade.getStudent() == currentStudent){
-                grade.setGradeValue(gradeValue);
-            }
-        }
+        currentGrade.setGradeValue(gradeValue);
 
         return true;
     }
 
     /**
-     * Prints out {@code Grade}s
+     * Prints out {@code Grade}s details
      */
     public static void viewGrades(){
         int choice = 0;
@@ -146,41 +129,33 @@ public class GradeManager {
                 break;
             case 2:
                 int courceID = 0;
-                Course currentCourse = null;
+                ArrayList<Grade> gradesOfCourse = null;
                 
                 System.out.print("ID of the course: ");
                 courceID = in.nextInt();
                 nextLine = in.nextLine();
 
-                if(isGradeExists(courceID, 2)){
-                    for (Grade grade : GradeManager.getGradesList()) {
-                        if(grade.getCourse().getCourseID() == courceID){
-                            currentCourse = grade.getCourse();
-                        }
-                    }
-                    viewGrades(currentCourse);
-                }else{
-                    System.out.println("There isn't any course that have " + courceID + " ID graded.");
+                gradesOfCourse = GradeManager.findGrades(courceID, 2);
+
+                for (Grade grade : gradesOfCourse) {
+                    viewGrades(grade, 2);
                 }
+                
                 break;
             case 3:
                 int studentID = 0;
-                Student currentStudent = null;
+                ArrayList<Grade> gradesOfStudent = null;
                 
                 System.out.print("ID of the student: ");
                 studentID = in.nextInt();
                 nextLine = in.nextLine();
 
-                if(isGradeExists(studentID, 2)){
-                    for (Grade grade : GradeManager.getGradesList()) {
-                        if(grade.getStudent().getStudentID() == studentID){
-                            currentStudent = grade.getStudent();
-                        }
-                    }
-                    viewGrades(currentStudent);
-                }else{
-                    System.out.println("There isn't any student that have " + studentID + " ID graded.");
+                gradesOfStudent = GradeManager.findGrades(studentID, 1);
+
+                for (Grade grade : gradesOfStudent) {
+                    viewGrades(grade, 1);
                 }
+
                 break;
             default:
                 break;
@@ -188,33 +163,23 @@ public class GradeManager {
     }
 
     /**
-     * Prints spesific {@code Student}'s {@code Grade}s
-     * @param student {@code Student} that going to showed
+     * Prints spesific {@code Student}'s or {@code Course}'s {@code Grade}s
+     * @param grade  {@code Grade} that going to printed
+     * @param choice Specifies for {@code Student}-1 or {@code Course}-2
      */
-    public static void viewGrades(Student student){
-        for(Grade grade : GradeManager.getGradesList()){
-            if(grade.getStudent() == student){
-                String output = "";
-                output += "ID of Course: " + grade.getCourse().getCourseID() + "\n";
-                output += "Grade: " + grade.getGradeValue() + "\n";
-                System.out.println(output + "\n");
-            }
+    public static void viewGrades(Grade grade, int choice){
+        String output = "";
+        
+        if(choice == 1){
+            output += "ID of Student: " + grade.getStudent().getStudentID() + "\n";
+            output += "Grade: " + grade.getGradeValue() + "\n";
+            System.out.println(output + "\n");
+        }else if(choice == 2){
+            output += "ID of Course: " + grade.getCourse().getCourseID() + "\n";
+            output += "Grade: " + grade.getGradeValue() + "\n";
+            System.out.println(output + "\n");
         }
-    }
 
-    /**
-     * Prints spesific {@code Course}'s {@code Grade}s
-     * @param course {@code Course} that going to showed
-     */
-    public static void viewGrades(Course course){
-        for(Grade grade : GradeManager.getGradesList()){
-            if(grade.getCourse() == course){
-                String output = "";
-                output += "ID of Student: " + grade.getStudent().getStudentID() + "\n";
-                output += "Grade: " + grade.getGradeValue() + "\n";
-                System.out.println(output + "\n");
-            }
-        }
     }
 
     /**
@@ -232,40 +197,26 @@ public class GradeManager {
 
         if(choice == 1){
             int studentID = 0;
-            Student currentStudent = null;
+            ArrayList<Grade> gradesOfStudent = null;
                 
             System.out.print("ID of the student: ");
             studentID = in.nextInt();
             nextLine = in.nextLine();
 
-            if(isGradeExists(studentID, 1)){
-                for (Grade grade : GradeManager.getGradesList()) {
-                    if(grade.getStudent().getStudentID() == studentID){
-                        currentStudent = grade.getStudent();
-                    }
-                }
-                System.out.println("Avarage: " + calculateAverageGrade(currentStudent));
-            }else{
-                System.out.println("There isn't any student that have " + studentID + " ID graded.");
-            }
+            gradesOfStudent = GradeManager.findGrades(studentID, 1);
+
+            System.out.println("Avarage: " + calculateAverageGrade(gradesOfStudent));
         }else if(choice == 2){
             int courceID = 0;
-            Course currentCourse = null;
+            ArrayList<Grade> gradesOfCourse = null;
                 
             System.out.print("ID of the course: ");
             courceID = in.nextInt();
             nextLine = in.nextLine();
 
-            if(isGradeExists(courceID, 2)){
-                for (Grade grade : GradeManager.getGradesList()) {
-                    if(grade.getCourse().getCourseID() == courceID){
-                        currentCourse = grade.getCourse();
-                    }
-                }
-                System.out.println("Avarage: " + calculateAverageGrade(currentCourse));
-            }else{
-                System.out.println("There isn't any course that have " + courceID + " ID graded.");
-            }
+            gradesOfCourse = GradeManager.findGrades(courceID, 2);
+
+            System.out.println("Avarage: " + calculateAverageGrade(gradesOfCourse));
         }else{
             System.out.println("Please choose 1 or 2!");
         }
@@ -273,34 +224,15 @@ public class GradeManager {
 
     /**
      * Avarage calculator
-     * @param student {@code Student} going to take {@code Grades}
+     * @param grades {@code Grade}s of {@code Student} or {@code Course} that going to take avarage.
      * @return        Avarage of grade values
      */
-    public static double calculateAverageGrade(Student student){
+    public static double calculateAverageGrade(ArrayList<Grade> grades){
         double sumOfGrades = 0.0;
         int count = 0;
-        for(Grade grade : GradeManager.getGradesList()){
-            if(grade.getStudent() == student){
-                sumOfGrades += grade.getGradeValue();
-                count++;
-            }
-        }
-        return sumOfGrades / count;
-    }
-
-    /**
-     * Avarage calculator
-     * @param course {@code Course} going to take {@code Grades}
-     * @return        Avarage of grade values
-     */
-    public static double calculateAverageGrade(Course course){
-        double sumOfGrades = 0.0;
-        int count = 0;
-        for(Grade grade : GradeManager.getGradesList()){
-            if(grade.getCourse() == course){
-                sumOfGrades += grade.getGradeValue();
-                count++;
-            }
+        for(Grade grade : grades){
+            sumOfGrades += grade.getGradeValue();
+            count++;
         }
         return sumOfGrades / count;
     }
@@ -311,41 +243,58 @@ public class GradeManager {
      * @param course  {@code Course} going to checked
      * @return        Is this {@code Grade} exists
      */
-    public static boolean isGradeExists(Student student, Course course){
-        boolean isExist = false;
+    public static Grade findGrade(Student student, Course course, boolean isPrinted){
         for (Grade grade : GradeManager.getGradesList()) {
             if(grade.getCourse() == course && grade.getStudent() == student){
-                isExist = true;
+                return grade;
             }
         }
-        return isExist;
+
+        if(isPrinted){
+            System.out.println("There isn't any grade of student with " + student.getStudentID() + " as ID of course with " + course.getCourseID() + " as ID.");
+        }
+
+        return null;
     }
 
     /**
-     * Checks the grades existence according to ID
+     * Finds {@code Grade}s according to courseID or studentID
      * @param ID     ID of {@code Student} or {@code Course}
-     * @param choice Determine {@code Student}(1) or {@code Course}(2)
+     * @param choice Determine {@code Student}-1 or {@code Course}-2
      * @return       Is grade exists
      */
-    public static boolean isGradeExists(int ID, int choice){
-        boolean isExist = false;
-        switch (choice) {
-            case 1:
-                for (Grade grade : GradeManager.getGradesList()) {
-                    if(grade.getStudent().getStudentID() == ID){
-                        isExist = true;
-                    }
+    public static ArrayList<Grade> findGrades(int ID, int choice){
+        ArrayList<Grade> output = new ArrayList<>();
+
+        if(choice == 1){
+
+            for (Grade grade : GradeManager.getGradesList()) {
+                if(grade.getStudent().getStudentID() == ID){
+                    output.add(grade);
                 }
-                break;
-            case 2:
-                for (Grade grade : GradeManager.getGradesList()) {
-                    if(grade.getCourse().getCourseID() == ID){
-                        isExist = true;
-                    }
+            }
+
+            if(output.isEmpty()){
+                System.out.println("There isn't any course that have " + ID + " ID graded.");
+                return null;
+            }
+            
+        }else if(choice == 2){
+
+            for (Grade grade : GradeManager.getGradesList()) {
+                if(grade.getCourse().getCourseID() == ID){
+                    output.add(grade);
                 }
-                break;
+            }
+            
+            if(output.isEmpty()){
+                System.out.println("There isn't any student that have " + ID + " ID graded.");
+                return null;
+            }
+            
         }
-        return isExist;
+        
+        return output;
     }
 
     /**

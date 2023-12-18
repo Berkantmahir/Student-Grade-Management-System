@@ -30,7 +30,7 @@ public class StudentManager {
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(StudentManager.isStudentExist(studentID)){
+        if(StudentManager.findStudent(studentID, false) != null){
             System.out.println("This ID already exists!");
             return false;
         }
@@ -64,20 +64,15 @@ public class StudentManager {
         studentID = in.nextInt();
         nextLine = in.nextLine();
         
-        if(!StudentManager.isStudentExist(studentID)){
-            System.out.println("There isn't any student that have " + studentID + " ID.");
+        studentRemoved = StudentManager.findStudent(studentID, true);
+
+        if(studentRemoved != null){
+            StudentManager.studentsList.remove(studentRemoved);
+            return true;
+        }else{
             return false;
         }
 
-        for(Student student : StudentManager.getStudentsList()){
-            if(student.getStudentID() == studentID){
-                studentRemoved = student;
-            }
-        }
-
-        StudentManager.studentsList.remove(studentRemoved);
-
-        return true;
     }
 
     /**
@@ -96,47 +91,45 @@ public class StudentManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!CourseManager.isCourseExist(courseID)){
-            System.out.println("There isn't any course that have " + courseID + " ID.");
-            return false;
-        }
+        currentCourse = CourseManager.findCourse(courseID, true);
 
-        for(Course course : CourseManager.getCourseList()){
-            if(course.getCourseID() == courseID){
-                currentCourse = course;
-            }
+        if(currentCourse == null){
+            return false;
         }
 
         System.out.print("ID of the student going to enrolled: ");
         studentID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(!StudentManager.isStudentExist(studentID)){
-            System.out.println("There isn't any student that have " + studentID + " ID.");
+        currentStudent = StudentManager.findStudent(studentID, true);
+
+        if(currentStudent != null){
+            return currentCourse.addStudent(currentStudent);
+        }else{
             return false;
         }
 
-        for(Student student : StudentManager.getStudentsList()){
-            if(student.getStudentID() == studentID){
-                currentStudent = student;
-            }
-        }
-
-        return currentCourse.addStudent(currentStudent);
     }
 
     /**
-     * Checks if this {@code Student} is already created.
-     * @param ID ID of the {@code Student} that going to get checked
-     * @return   Is this {@code Student} exists
+     * Finds {@code Student} with studentID.
+     * @param studentID ID of the {@code Student} that going to get checked
+     * @param choice    Whether find massage printed or not
+     * @return          {@code Student} with gicen ID. If student doesn't exist returns null.
      */
-    public static boolean isStudentExist(int ID){
-        for (Student student : StudentManager.getStudentsList()) {
-            if(student.getStudentID() == ID){
-                return true;
+    public static Student findStudent(int studentID, boolean isPrinted){
+
+        for(Student student : StudentManager.getStudentsList()){
+            if(student.getStudentID() == studentID){
+                return student;
             }
         }
-        return false;
+
+        if(isPrinted){
+            System.out.println("There isn't any student that have " + studentID + " as ID.");
+        }
+
+        return null;
     }
 
     /**

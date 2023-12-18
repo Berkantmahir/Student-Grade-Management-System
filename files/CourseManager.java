@@ -29,7 +29,7 @@ public class CourseManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
 
-        if(StudentManager.isStudentExist(courseID)){
+        if(CourseManager.findCourse(courseID, false) != null){//
             System.out.println("This ID already exists!");
             return false;
         }
@@ -59,20 +59,15 @@ public class CourseManager {
         courseID = in.nextInt();
         nextLine = in.nextLine();
         
-        if(!CourseManager.isCourseExist(courseID)){
-            System.out.println("There isn't any course that have " + courseID + " ID.");
+        courseRemoved = CourseManager.findCourse(courseID, true);
+
+        if(courseRemoved != null){
+            CourseManager.getCourseList().remove(courseRemoved);
+            return true;
+        }else{
             return false;
         }
 
-        for(Course course : CourseManager.getCourseList()){
-            if(course.getCourseID() == courseID){
-               courseRemoved = course;
-            }
-        }
-
-        CourseManager.getCourseList().remove(courseRemoved);
-
-        return true;
     }
 
     /**
@@ -80,6 +75,7 @@ public class CourseManager {
      */
     public static void viewCourseDetails(){
         int courseID = 0;
+        Course course;
         String nextLine = "";
 
         System.out.print("ID of the course going to view: ");
@@ -88,15 +84,12 @@ public class CourseManager {
 
         System.out.println();
         
-        if(!CourseManager.isCourseExist(courseID)){
-            System.out.println("There isn't any course that have " + courseID + " ID.");
-        }else{
-            for(Course course : CourseManager.getCourseList()){
-                if(course.getCourseID() == courseID){
-                    System.out.println(course);
-                }
-            }
+        course = CourseManager.findCourse(courseID, true);
+
+        if(course != null){
+            System.out.print(course);
         }
+
     }
 
     /**
@@ -104,13 +97,18 @@ public class CourseManager {
      * @param ID ID of the {@code Course} that going to get checked
      * @return  Is this {@code Course} exists
      */
-    public static boolean isCourseExist(int ID){
-        for (Course course : CourseManager.getCourseList()) {
-            if(course.getCourseID() == ID){
-                return true;
+    public static Course findCourse(int courseID, boolean isPrinted){
+        for(Course course : CourseManager.getCourseList()){
+            if(course.getCourseID() == courseID){
+                return course;
             }
         }
-        return false;
+
+        if(isPrinted){
+            System.out.println("There isn't any course that have " + courseID + " as ID.");
+        }
+
+        return null;
     }
 
     /**
