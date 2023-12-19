@@ -7,13 +7,13 @@ import java.util.ArrayList;
  * @see Comparable
  * @author Rıfat Arifoğlu
  */
+public class Course implements Comparable<Course> {
 
-public class Course implements Comparable<Course>{
-    
-    //Variables
+    // Variables
     private int courseID;
     private String courseName;
     private int quota;
+    private Instructor instructor;
     private ArrayList<Student> enrolledStudents;
 
     /**
@@ -21,36 +21,38 @@ public class Course implements Comparable<Course>{
      * @param courseID   ID of the {@code Course}
      * @param courseName Name of the {@code Course}
      */
-    public Course(int courseID, String courseName, int quota){
+    public Course(int courseID, String courseName, int quota) {
         setCourseID(courseID);
         setCourseName(courseName);
         setQuota(quota);
+        setInstructor(null);
         enrolledStudents = new ArrayList<>();
     }
 
     /**
      * Default Constructor
      */
-    public Course(){
+    public Course() {
         this(0, "", 0);
     }
 
     /**
-     * Add student to the {@code Course}
-     * @param student Student that going to add to the {@code Course}
-     * @return        If student has been enrolled
+     * Add {@code Student} to the {@code Course}
+     * @param student {@code Student} that going to add to the {@code Course}
+     * @return Is {@code Student} has been enrolled
      */
-    public boolean addStudent(Student student){
+    public boolean addStudent(Student student) {
         for (Student enrolled : this.getEnrolledStudents()) {
-            if(student == enrolled){
+            if (student == enrolled) {
                 System.out.println("This student already enrolled.");
                 return false;
             }
         }
-        if(quota > this.getEnrolledStudents().size()){
+        if (quota > this.getEnrolledStudents().size()) {
             this.getEnrolledStudents().add(student);
+            student.addCourse(this);
             return true;
-        }else{
+        } else {
             System.out.println("Quota has reached.");
             return false;
         }
@@ -59,7 +61,7 @@ public class Course implements Comparable<Course>{
     /**
      * Compare to interface
      * @param o {@code Course} who is going compared
-     * @return  Difference of two {@code Course}s' IDs
+     * @return Difference of two {@code Course}s' IDs
      */
     @Override
     public int compareTo(Course o) {
@@ -76,12 +78,12 @@ public class Course implements Comparable<Course>{
         output += "ID: " + this.getCourseID() + "\n";
         output += "Name: " + this.getCourseName();
 
-        if(!this.getEnrolledStudents().isEmpty()){
+        if (!this.getEnrolledStudents().isEmpty()) {
             output += "\nStudents:\n";
             for (Student student : this.getEnrolledStudents()) {
                 output += "\n" + student + "\n";
             }
-        }else{
+        } else {
             output += "\nThere isn't any student currently enrolled to this course";
         }
 
@@ -110,10 +112,17 @@ public class Course implements Comparable<Course>{
     }
 
     /**
-     * @return {@code ArrayList} of the enrolled students
+     * @return {@code ArrayList} of the enrolled {@code Student}s
      */
     public ArrayList<Student> getEnrolledStudents() {
         return enrolledStudents;
+    }
+
+    /**
+     * @return {@code Instructor} of the {@code Course}
+     */
+    public Instructor getInstructor() {
+        return instructor;
     }
 
     /**
@@ -135,5 +144,12 @@ public class Course implements Comparable<Course>{
      */
     public void setQuota(int quota) {
         this.quota = quota;
+    }
+
+    /**
+     * @param instructor {@code Instructor} of the {@code Course}
+     */
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

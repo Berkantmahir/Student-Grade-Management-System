@@ -10,100 +10,136 @@ public class Main{
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        int choice = 0;
+        int firstChoice = 0;
+        int secondChoice = 0;
         String nextLine = "";
 
         do {
 
-            System.out.print("1-Student Management\n2-Course Management\n3-Grade Management\n4-Exit\nChoice: ");
-            choice = in.nextInt();
+            System.out.print("1-Student Login\n2-Instructor Login\n3-Admin Login\n4-Exit\nChoice: ");
+            firstChoice = in.nextInt();
             nextLine = in.nextLine();
 
             System.out.println();
 
-            switch (choice) {
-                case 1:
-                    int choiceA = 0;
+            if(firstChoice == 1){
+                int studentID = 0;
+                Student currentStudent = null;
 
-                    System.out.print("1-Add Student\n2-Remove Student\n3-Enroll Student\n4-Return\nChoice: ");
-                    choiceA = in.nextInt();
-                    nextLine = in.nextLine();
+                System.out.print("Please enter your ID: ");
+                studentID = in.nextInt();
+                nextLine = in.nextLine();
 
-                    System.out.println();
+                currentStudent = StudentManager.findStudent(studentID, true);
+                if(currentStudent == null){
+                    continue;
+                }
+                
+                System.out.print("1-Enroll Course\n2-View Personal Informations\n3-View Courses\n4-View Grades\n5-Log out\nChoice: ");
+                secondChoice = in.nextInt();
+                nextLine = in.nextLine();
 
-                    if(choiceA == 1){
-                        StudentManager.addStudent();
-                    }else if(choiceA == 2){
-                        StudentManager.removeStudent();
-                    }else if(choiceA == 3){
-                        StudentManager.enrollStudent();
-                    }else if(choiceA == 4){
-                        System.out.println("Returning...");
-                    }else{
-                        System.out.println("Please enter a valid choice");
-                    }
+                switch (secondChoice) {
+                    case 1:
+                        StudentManager.enrollStudent(currentStudent);
+                        break;
+                    case 2:
+                        System.out.println(currentStudent);
+                        break;
+                    case 3:
+                        StudentManager.viewCourses(currentStudent);
+                        break;
+                    case 4:
+                        GradeManager.viewStudentGrades(currentStudent);
+                        break;
+                    case 5:
+                        System.out.println("Logging out...");
+                        break;
+                    default:
+                        break;
+                }
+            }else if(firstChoice == 2){
+                int instructorID = 0;
+                Instructor currentInstructor = null;
 
-                    break;
-                case 2:
-                    int choiceB = 0;
+                System.out.print("Please enter your ID: ");
+                instructorID = in.nextInt();
+                nextLine = in.nextLine();
 
-                    System.out.print("1-Add Course\n2-Remove Course\n3-View Course Details\n4-Return\nChoice: ");
-                    choiceB = in.nextInt();
-                    nextLine = in.nextLine();
+                currentInstructor = InstructorManager.findInstructor(instructorID, true);          
+                if(currentInstructor == null){
+                    continue;
+                }
 
-                    System.out.println();
+                System.out.print("1-Give Course\n2-View Personal Informations\n3-View Courses\n4-Record New Grade\n5-Update Grade\n6-View Grade\n7-Log out\nChoice: ");
+                secondChoice = in.nextInt();
+                nextLine = in.nextLine();
 
-                    if(choiceB == 1){
-                        CourseManager.addCourse();
-                    }else if(choiceB == 2){
-                        CourseManager.removeCourse();
-                    }else if(choiceB == 3){
-                        CourseManager.viewCourseDetails();
-                    }else if(choiceB == 4){
-                        System.out.println("Returning...");
-                    }else{
-                        System.out.println("Please enter a valid choice");
-                    }
-
-                    break;
-                case 3:
-                    int choiceC = 0;
-
-                    System.out.print("1-Record New Grade\n2-Update Grade\n3-View Grades\n4-View Avarage Grades\n5-Return\nChoice: ");
-                    choiceC = in.nextInt();
-                    nextLine = in.nextLine();
-
-                    System.out.println();
-
-                    if(choiceC == 1){
+                switch (secondChoice) {
+                    case 1:
+                        InstructorManager.giveCourse(currentInstructor);
+                        break;
+                    case 2:
+                        System.out.println(currentInstructor);
+                        break;
+                    case 3:
+                        InstructorManager.viewCourses(currentInstructor);
+                        break;
+                    case 4:
                         GradeManager.recordNewGrade();
-                    }else if(choiceC == 2){
+                        break;
+                    case 5:
                         GradeManager.updateGrade();
-                    }else if(choiceC == 3){
+                        break;
+                    case 6:
                         GradeManager.viewGrades();
-                    }else if(choiceC == 4){
-                        GradeManager.viewAvarageGrade();
-                    }else if(choiceC == 5){
-                        System.out.println("Returning...");
-                    }else{
-                        System.out.println("Please enter a valid choice");
-                    }
+                        break;
+                    case 7:
+                        System.out.println("Logging out...");
+                        break;
+                    default:
+                        break;
+                }
+            }else if(firstChoice == 3){
+                System.out.print("1-Create Student\n2-Remove Student\n3-Create Instructor\n4-Remove Instructor\n5-Create Course\n6-Remove Course\nChoice: ");
+                secondChoice = in.nextInt();
+                nextLine = in.nextLine();
 
-                    break;
-                case 4:
-                    System.out.println("Exitting...");
-                    break;
-                default:
-                    System.out.println("Please enter a valid choice");
-                    break;
+                switch (secondChoice) {
+                    case 1:
+                        StudentManager.createStudent();
+                        break;
+                    case 2:
+                        StudentManager.removeStudent();
+                        break;
+                    case 3:
+                        InstructorManager.createInstructor();
+                        break;
+                    case 4:
+                        InstructorManager.removeInstructor();
+                        break;
+                    case 5:
+                        CourseManager.createCourse();
+                        break;
+                    case 6:
+                        CourseManager.removeCourse();
+                        break;
+                    default:
+                        break;
+                }
+            }else if(firstChoice == 4){
+                System.out.println("Exitting...");
+            }else{
+                System.out.println("Please enter a valid input!");
             }
 
             System.out.println();
             
-        } while (choice != 4);
+        } while (firstChoice != 4);
         
         //Close the Scanners of managers
         StudentManager.closeScanner();
+        InstructorManager.closeScanner();
         CourseManager.closeScanner();
         GradeManager.closeScanner();
     }

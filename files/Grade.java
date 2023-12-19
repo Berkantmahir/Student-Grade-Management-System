@@ -5,9 +5,9 @@ package files;
  * @see Comparable
  * @author Rıfat Arifoğlu
  */
-public class Grade implements Comparable<Grade>{
-    
-    //Variables
+public class Grade implements Comparable<Grade> {
+
+    // Variables
     private double gradeValue;
     private Student student;
     private Course course;
@@ -17,7 +17,7 @@ public class Grade implements Comparable<Grade>{
      * @param student {@code Student}
      * @param course  {@code Course}
      */
-    public Grade(Student student, Course course, double gradeValue){
+    public Grade(Student student, Course course, double gradeValue) {
         this.gradeValue = gradeValue;
         this.student = student;
         this.course = course;
@@ -26,18 +26,18 @@ public class Grade implements Comparable<Grade>{
     /**
      * Default Constructor
      */
-    public Grade(){
+    public Grade() {
         this(null, null, 0.0);
     }
 
     /**
      * Compare to interface
      * @param o {@code Grade} who is going compared
-     * @return  Difference of two {@code Grade}s' values
+     * @return Difference of two {@code Grade}s' values
      */
     @Override
     public int compareTo(Grade o) {
-        return (int)(this.getGradeValue() - o.getGradeValue());
+        return (int) (this.getGradeValue() - o.getGradeValue());
     }
 
     /**
@@ -68,14 +68,14 @@ public class Grade implements Comparable<Grade>{
     }
 
     /**
-     * @return Grade value
+     * @return {@code Grade} value
      */
     public double getGradeValue() {
         return gradeValue;
     }
 
     /**
-     * @param gradeValue Value of grade
+     * @param gradeValue Value of {@code Grade}
      */
     public void setGradeValue(double gradeValue) {
         this.gradeValue = gradeValue;

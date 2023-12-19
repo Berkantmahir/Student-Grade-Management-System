@@ -171,13 +171,28 @@ public class GradeManager {
         String output = "";
         
         if(choice == 1){
-            output += "ID of Student: " + grade.getStudent().getStudentID() + "\n";
+            output += "\nID of Student: " + grade.getStudent().getStudentID() + "\n";
             output += "Grade: " + grade.getGradeValue() + "\n";
-            System.out.println(output + "\n");
+            System.out.println(output);
         }else if(choice == 2){
-            output += "ID of Course: " + grade.getCourse().getCourseID() + "\n";
+            output += "\nID of Course: " + grade.getCourse().getCourseID() + "\n";
             output += "Grade: " + grade.getGradeValue() + "\n";
-            System.out.println(output + "\n");
+            System.out.println(output);
+        }
+
+    }
+
+    /**
+     * Print out a {@code Student}'s grades
+     * @param student
+     */
+    public static void viewStudentGrades(Student student){
+        System.out.println("Grades of student:\n");
+
+        ArrayList<Grade> gradesOfStudent = GradeManager.findGrades(student.getStudentID(), 1);
+
+        for (Grade grade : gradesOfStudent) {
+            viewGrades(grade, 1);
         }
 
     }

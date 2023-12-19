@@ -14,10 +14,10 @@ public class StudentManager {
     private static Scanner in = new Scanner(System.in);
     
     /**
-     * Create a {@code Student}
+     * Creates a {@code Student}
      * @return Is the {@code Student} created
      */
-    public static boolean addStudent(){
+    public static boolean createStudent(){
         int studentID = 0;
         String name = "";
         int age = 0;
@@ -67,7 +67,7 @@ public class StudentManager {
         studentRemoved = StudentManager.findStudent(studentID, true);
 
         if(studentRemoved != null){
-            StudentManager.studentsList.remove(studentRemoved);
+            StudentManager.getStudentsList().remove(studentRemoved);
             return true;
         }else{
             return false;
@@ -112,9 +112,34 @@ public class StudentManager {
     }
 
     /**
+     * Enroll {@code Student} to a {@code Course}
+     * @param  student {@code Student} that going to enrolled
+     * @return         Is {@code Student} has enrolled
+     */
+    public static boolean enrollStudent(Student student){
+        int courseID = 0;
+        Course currentCourse = null;
+
+        String nextLine = "";
+
+        System.out.print("ID of the course going to enrolled: ");
+        courseID = in.nextInt();
+        nextLine = in.nextLine();
+
+        currentCourse = CourseManager.findCourse(courseID, true);
+
+        if(currentCourse == null){
+            return false;
+        }
+        
+        return currentCourse.addStudent(student);
+
+    }
+
+    /**
      * Finds {@code Student} with studentID.
      * @param studentID ID of the {@code Student} that going to get checked
-     * @param choice    Whether find massage printed or not
+     * @param isPrinted Whether find massage printed or not
      * @return          {@code Student} with gicen ID. If student doesn't exist returns null.
      */
     public static Student findStudent(int studentID, boolean isPrinted){
@@ -130,6 +155,23 @@ public class StudentManager {
         }
 
         return null;
+    }
+
+    /**
+     * View the {@code Course}s that {@code Student} has enrolled
+     * @param student {@code Student} that going to showed
+     */
+    public static void viewCourses(Student student){
+        if(student.getCourses() == null){
+            System.out.println("Student has not enrolled to any course currently.");
+        }else{
+            System.out.println("Courses that student enrolled:");
+            for (Course course : student.getCourses()) {
+                String output = "\nID: " + course.getCourseID() + "\n";
+                output += "Course name: " + course.getCourseName();
+                System.out.println(output);
+            }
+        }
     }
 
     /**

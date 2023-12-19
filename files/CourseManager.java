@@ -14,10 +14,10 @@ public class CourseManager {
     private static Scanner in = new Scanner(System.in);
 
     /**
-     * Create a {@code Course}
+     * Creates a {@code Course}
      * @return Is the {@code Course} created
      */
-    public static boolean addCourse(){
+    public static boolean createCourse(){
         int courseID = 0;
         String name = "";
         int quota = 0;
