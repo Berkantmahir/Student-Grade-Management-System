@@ -70,6 +70,16 @@ public class Instructor implements Comparable<Instructor> {
     }
 
     /**
+     * Removing the course registered to a instructor.To prevent misundertoodments.
+     * @param course the course that previous instructor gives.
+     * @return Is{@code Course} has been removed.
+     */
+    public boolean removeCourse(Course course) {
+        this.courses.remove(course);
+        return true;
+    }
+
+    /**f
      * @return Age of the {@code Instructor}
      */
     public int getInstructorAge() {

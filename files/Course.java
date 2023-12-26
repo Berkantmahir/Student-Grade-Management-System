@@ -150,6 +150,7 @@ public class Course implements Comparable<Course> {
      * @param instructor {@code Instructor} of the {@code Course}
      */
     public void setInstructor(Instructor instructor) {
+        this.instructor.removeCourse(this); // remove the course from the previous instructor.
         this.instructor = instructor;
     }
 }
