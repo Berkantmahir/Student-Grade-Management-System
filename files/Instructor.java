@@ -79,7 +79,7 @@ public class Instructor implements Comparable<Instructor> {
         return true;
     }
 
-    /**f
+    /**
      * @return Age of the {@code Instructor}
      */
     public int getInstructorAge() {
